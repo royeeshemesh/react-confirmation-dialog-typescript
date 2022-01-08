@@ -1,7 +1,13 @@
 {
   "name": "confirmation-dialog-typescript",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "author": {
+    "name": "Royee Shemesh",
+    "email": "royee@flexpert.co.il"
+  },
+  "repository": {
+    "url": "https://github.com/royeeshemesh/react-confirmation-dialog-typescript"
+  },
   "dependencies": {
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
@@ -36,5 +42,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
