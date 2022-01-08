@@ -5,7 +5,7 @@ import DeleteButton from "./DeleteButton";
 import ConfirmationModalContextProvider from "./modalConfirmationContext";
 import people from './people.json';
 
-type People = {
+export type People = {
     id: number;
     first_name: string;
     last_name: string;
@@ -30,7 +30,7 @@ function App() {
             <td>{person.gender}</td>
             <td>{person.ip_address}</td>
             <td>
-                <DeleteButton onClick={() => remove(person.id)} className="btn btn-danger">Delete</DeleteButton>
+                <DeleteButton person={person} onClick={() => remove(person.id)} className="btn btn-danger">Delete</DeleteButton>
             </td>
         </tr>
     ));

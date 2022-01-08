@@ -1,13 +1,13 @@
 import React, {useContext, useRef, useState} from "react";
 import Modal from "react-bootstrap/Modal";
 
-type ModalContextType = {
-    showConfirmation: (title: string, message: string | JSX.Element) => Promise<boolean>,
-};
+type UseModalShowReturnType = {
+    show: boolean;
+    setShow: (value: boolean) => void;
+    onHide: () => void;
+}
 
-const ConfirmationModalContext = React.createContext<ModalContextType>({} as ModalContextType);
-
-const useModalShow = () => {
+const useModalShow = (): UseModalShowReturnType => {
     const [show, setShow] = useState(false);
 
     const handleOnHide = () => {
@@ -21,19 +21,27 @@ const useModalShow = () => {
     }
 };
 
-const ConfirmationModalContextProvider = (props: any) => {
+type ModalContextType = {
+    showConfirmation: (title: string, message: string | JSX.Element) => Promise<boolean>;
+};
+
+type ConfirmationModalContextProviderProps = {
+    children: React.ReactNode
+}
+
+const ConfirmationModalContext = React.createContext<ModalContextType>({} as ModalContextType);
+
+const ConfirmationModalContextProvider: React.FC<ConfirmationModalContextProviderProps> = (props) => {
     const {setShow, show, onHide} = useModalShow();
+    const [content, setContent] = useState<{ title: string, message: string | JSX.Element} | null>();
     const resolver = useRef<Function>();
 
-    const [content, setContent] = useState<{ title: string, message: string | JSX.Element } | null>();
     const handleShow = (title: string, message: string | JSX.Element): Promise<boolean> => {
         setContent({
             title,
             message
         });
-
         setShow(true);
-
         return new Promise(function (resolve) {
             resolver.current = resolve;
         });
@@ -45,39 +53,25 @@ const ConfirmationModalContextProvider = (props: any) => {
 
     const handleOk = () => {
         resolver.current && resolver.current(true);
-        setContent(null);
         onHide();
     };
 
     const handleCancel = () => {
         resolver.current && resolver.current(false);
-        setContent(null);
         onHide();
-    };
-
-    const getMessage = () => {
-        if (typeof content?.message === 'string') {
-            return <p>{content.message}</p>
-        }
-
-        return content?.message
     };
 
     return (
         <ConfirmationModalContext.Provider value={modalContext}>
             {props.children}
 
-            {/*{(content as any).title}*/}
             {content &&
                 <Modal show={show} onHide={onHide} centered dialogClassName={`modal-md`}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <label className="title">{(content as any).title}</label>
-                        </Modal.Title>
+                    <Modal.Header>
+                        <label>{content.title}</label>
                     </Modal.Header>
-
                     <Modal.Body>
-                        {getMessage()}
+                        <label>{content.message}</label>
                     </Modal.Body>
 
                     <Modal.Footer>
