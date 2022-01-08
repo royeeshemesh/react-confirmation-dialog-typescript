@@ -8,6 +8,7 @@
   "repository": {
     "url": "https://github.com/royeeshemesh/react-confirmation-dialog-typescript"
   },
+  "homepage": "https://royeeshemesh.github.io/react-confirmation-dialog-typescript/",
   "dependencies": {
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
