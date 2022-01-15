@@ -1,6 +1,6 @@
 # Customizable confirmation dialog in React.js using Hooks, Context API, and TypeScript
 
-This is the code base repository for the medium article: [])
+This is the code base repository for the medium article: [Customizable confirmation dialog in React.js using Hooks, Context API, and TypeScript](https://medium.com/@royeeshemesh/customizable-confirmation-dialog-in-react-js-using-hooks-context-api-and-typescript-2ab52a46228)
 
 A working demo can be found [here](https://royeeshemesh.github.io/react-confirmation-dialog-typescript/)
 
